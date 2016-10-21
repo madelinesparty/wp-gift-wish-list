@@ -221,11 +221,11 @@ class Gift_Wish_List {
 			}
 		
 			// Act on the keyword
-			switch ( $fields[0] )
+			switch ( strtolower( $fields[0] ) )
 			{
 		  	case "family":
 		    	if ( count( $fields ) != 2 ) {
-		    		 throw new Exception( sprintf( __('Incorrect field count for "family" keyword: %s', 'gift-wish-list' ) ), htmlentities( $line ) );
+		    		 throw new Exception( __('Incorrect field count for "family" keyword', 'gift-wish-list' ) );
 				}
 		    	$name = $fields[1];
 		
@@ -239,20 +239,20 @@ class Gift_Wish_List {
 		
             case "person":
                 if ( count( $fields ) != 4 ) {
-                    throw new Exception( sprintf( __( 'Incorrect field count for "person" keyword: %s', 'gift-wish-list' ), htmlentities( $line ) ) );
+                    throw new Exception( __( 'Incorrect field count for "person" keyword', 'gift-wish-list' ) );
                 }
                 $age = $fields[1];
                 if ( !is_numeric( $age ) ) {
                     throw new Exception( __( 'Age must be numeric', 'gift-wish-list' ) );
                 }
-                $gender = $fields[2];
+                $gender = strtolower( $fields[2] );
 		        if ( $gender != 'm' && $gender != 'f' && $gender != 'g' ) {
-                    throw new Exception( _( 'Gender must be \'m\', \'f\' or \'g\'', 'gift-wish-list' ) );
+                    throw new Exception( __( 'Gender must be \'m\', \'f\' or \'g\'', 'gift-wish-list' ) );
                 }
 		        $name = $fields[3];
 		
 		        if ( $current_family == NULL ) {
-		            throw new Exception( sprintf( _( 'No family for member \'%s\'', 'gift-wish-list' ), htmlentities( $name ) ) );
+		            throw new Exception( sprintf( __( 'No family for member \'%s\'', 'gift-wish-list' ), htmlentities( $name ) ) );
                 }
 
            	    if ( ! $wpdb->insert( $family_members_table_name,
