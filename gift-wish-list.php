@@ -375,6 +375,8 @@ class Gift_Wish_List {
 		global $wpdb;
 		$settings_table_name = self::get_table_name( self::TABLE_SETTINGS );
 
+		$value = htmlentities(stripslashes($value), ENT_QUOTES|ENT_HTML5);
+		
 		if (self::setting_exists($name))
 		{
 			if ($allow_update)
